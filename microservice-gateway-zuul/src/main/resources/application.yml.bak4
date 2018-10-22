@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: microservice-geteway-zuul
+server:
+  port: 8040
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    user:
+      path: /user/**
+      serviceId: microservice-provider-user
+# 禁用ribbon对多个URL进行负载平衡
+ribbon:
+  eureka:
+    enabled: false
+microservice-provider-user:
+  ribbon:
+    listOfServers: http://192.168.180.1:7900,http://192.168.180.1:7901
